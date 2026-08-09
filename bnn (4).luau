@@ -1920,7 +1920,7 @@ local Uz = function(Y)
 		I.BackgroundColor3 = Color3.fromRGB(230, 230, 230);
 		I.BackgroundTransparency = 1.0;
 		I.Size = UDim2.new(1, 0, 1, 0);
-		I.Image = "rbxassetid://129781592728096";
+		I.Image = "https://www.roblox.com/asset/?id=94229691106565";
 		I.ImageRectOffset = Vector2.new(284, 4);
 		I.ImageRectSize = Vector2.new(24, 24);
 		I.ImageColor3 = dz.UIColor["Search Icon Color"];
