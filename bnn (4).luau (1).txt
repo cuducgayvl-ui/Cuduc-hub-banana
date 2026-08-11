@@ -1,4 +1,95 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/attack-module.lua"))()
+@echo off
+title Fix Lag Cuc Manh - Admin Required
+color 0A
+mode con cols=80 lines=35
+
+:: Kiểm tra quyền Admin
+net session >nul 2>&1
+if %errorLevel% neq 0 (
+    echo.
+    echo [!] BAN CAN CHAY BANG QUYEN ADMINISTRATOR!
+    echo Nhan chuot phai vao file -^> Run as administrator
+    pause
+    exit
+)
+
+echo.
+echo ================================================
+echo        FIX LAG CUC MANH - WINDOWS OPTIMIZER
+echo ================================================
+echo.
+echo Dang chay cac buoc toi uu...
+echo.
+
+:: 1. Dọn rác hệ thống cực mạnh
+echo [1/10] Dang don rac Temp, Prefetch, Recent...
+del /f /s /q %temp%\* >nul 2>&1
+del /f /s /q C:\Windows\Temp\* >nul 2>&1
+del /f /s /q C:\Windows\Prefetch\* >nul 2>&1
+del /f /s /q "%userprofile%\Recent\*" >nul 2>&1
+del /f /s /q "%userprofile%\AppData\Local\Temp\*" >nul 2>&1
+rd /s /q %temp% >nul 2>&1
+md %temp% >nul 2>&1
+echo      Done!
+
+:: 2. Xóa file rác Windows Update + Delivery Optimization
+echo [2/10] Dang don Windows Update cache...
+net stop wuauserv >nul 2>&1
+net stop bits >nul 2>&1
+net stop dosvc >nul 2>&1
+rd /s /q C:\Windows\SoftwareDistribution\Download >nul 2>&1
+md C:\Windows\SoftwareDistribution\Download >nul 2>&1
+net start wuauserv >nul 2>&1
+net start bits >nul 2>&1
+echo      Done!
+
+:: 3. Flush DNS + Reset mạng
+echo [3/10] Flush DNS + Reset TCP/IP...
+ipconfig /flushdns >nul
+netsh winsock reset >nul
+netsh int ip reset >nul
+echo      Done!
+
+:: 4. Tắt Visual Effects (Performance mode)
+echo [4/10] Tat hieu ung visual (toi uu toc do)...
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v VisualFXSetting /t REG_DWORD /d 2 /f >nul
+reg add "HKCU\Control Panel\Desktop" /v UserPreferencesMask /t REG_BINARY /d 9012038010000000 /f >nul
+reg add "HKCU\Control Panel\Desktop\WindowMetrics" /v MinAnimate /t REG_SZ /d 0 /f >nul
+echo      Done!
+
+:: 5. Power Plan High Performance
+echo [5/10] Chuyen sang High Performance Power Plan...
+powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c >nul 2>&1
+powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 >nul 2>&1
+powercfg /setactive e9a42b02-d5df-448d-aa00-03f14749eb61 >nul 2>&1
+echo      Done!
+
+:: 6. Tắt các dịch vụ không cần thiết gây lag
+echo [6/10] Tat dich vu khong can thiet...
+sc config "SysMain" start= disabled >nul 2>&1
+sc stop "SysMain" >nul 2>&1
+sc config "WSearch" start= disabled >nul 2>&1
+sc stop "WSearch" >nul 2>&1
+sc config "DiagTrack" start= disabled >nul 2>&1
+sc stop "DiagTrack" >nul 2>&1
+sc config "dmwappushservice" start= disabled >nul 2>&1
+sc stop "dmwappushservice" >nul 2>&1
+sc config "MapsBroker" start= disabled >nul 2>&1
+sc stop "MapsBroker" >nul 2>&1
+echo      Done!
+
+:: 7. Tối ưu Registry (Game + Latency)
+echo [7/10] Toi uu Registry (Game + Network)...
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v SystemResponsiveness /t REG_DWORD /d 0 /f >nul
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "GPU Priority" /t REG_DWORD /d 8 /f >nul
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v Priority /t REG_DWORD /d 6 /f >nul
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Scheduling Category" /t REG_SZ /d High /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v DisablePagingExecutive /t REG_DWORD /d 1 /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v TcpAckFrequency /t REG_DWORD /d 1 /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v TCPNoDelay /t REG_DWORD /d 1 /f >nul
+echo      Done!
+
+:: 8loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/attack-module.lua"))()
 local Y = game.Players;
 local d = Y.LocalPlayer;
 local R = d.Character.HumanoidRootPart;
