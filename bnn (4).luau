@@ -1,3 +1,9 @@
+-- Thông báo chào mừng tới cuduchub (đã tăng lên 10 giây)
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title = "CuducHub",
+    Text = "Chào mừng bạn tới cuduchub!",
+    Duration = 10 -- Thời gian hiện (giây)
+})
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/attack-module.lua"))()
 local Y = game.Players;
 local d = Y.LocalPlayer;
