@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Culink - Biến mọi lượt xem thành người theo dõi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .gradient-text {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #2563eb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .platform-btn {
+      transition: all 0.2s ease;
+    }
+    .platform-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .platform-btn.active {
+      ring: 3px;
+      ring-offset: 2px;
+    }
+    .fade-in {
+      animation: fadeIn 0.4s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-slate-50 via-white to-indigo-50 min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+          C
+        </div>
+        <span class="text-xl font-bold text-slate-800">Cu<span class="text-indigo-600">link</span></span>
+      </div>
+      <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+        <a href="#home" class="hover:text-indigo-600 transition">Trang chủ</a>
+        <a href="#features" class="hover:text-indigo-600 transition">Tính năng</a>
+        <a href="#create" class="hover:text-indigo-600 transition">Tạo link</a>
+        <a href="#faq" class="hover:text-indigo-600 transition">FAQ</a>
+      </div>
+      <div class="flex items-center gap-2">
+        <button class="px-4 py-2 text-sm font-medium text-slate-600 hover:text-indigo-600 transition">Đăng nhập</button>
+        <button class="px-4 py-2 text-sm font-medium bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition shadow-md shadow-indigo-200">
+          Đăng ký
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home" class="max-w-6xl mx-auto px-4 pt-16 pb-12 text-center">
+    <h1 class="text-4xl md:text-6xl font-extrabold text-slate-800 leading-tight mb-6">
+      Biến khán giả của bạn<br>
+      thành <span class="gradient-text">người theo dõi</span>
+    </h1>
+    <p class="text-lg text-slate-500 max-w-2xl mx-auto mb-8">
+      Nền tảng Sub to Unlock giúp bạn tăng subscriber, views và engagement trên YouTube, TikTok, Instagram, Facebook một cách hiệu quả.
+    </p>
+    <div class="flex items-center justify-center gap-3 mb-8">
+      <div class="flex -space-x-2">
+        <img src="https://i.pravatar.cc/40?img=1" class="w-9 h-9 rounded-full border-2 border-white" alt="">
+        <img src="https://i.pravatar.cc/40?img=5" class="w-9 h-9 rounded-full border-2 border-white" alt="">
+        <img src="https://i.pravatar.cc/40?img=8" class="w-9 h-9 rounded-full border-2 border-white" alt="">
+        <img src="https://i.pravatar.cc/40?img=12" class="w-9 h-9 rounded-full border-2 border-white" alt="">
+        <img src="https://i.pravatar.cc/40?img=15" class="w-9 h-9 rounded-full border-2 border-white" alt="">
+      </div>
+      <span class="text-sm text-slate-600 font-medium">+1,250,000 người đã sử dụng</span>
+      <div class="text-yellow-400 text-sm">★★★★★</div>
+    </div>
+    <a href="#create" class="inline-flex items-center gap-2 px-8 py-3.5 bg-slate-900 text-white font-semibold rounded-xl hover:bg-slate-800 transition shadow-xl shadow-slate-300">
+      Tạo link miễn phí ngay
+      <i class="fas fa-arrow-right"></i>
+    </a>
+  </section>
+
+  <!-- Create Form -->
+  <section id="create" class="max-w-3xl mx-auto px-4 pb-20">
+    <div class="bg-white rounded-2xl shadow-2xl shadow-indigo-100 border border-slate-100 p-6 md:p-8">
+      <h2 class="text-2xl font-bold text-slate-800 mb-6 text-center">Tạo Link Sub to Unlock</h2>
+
+      <!-- Title inputs -->
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <div>
+          <label class="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">Tiêu đề</label>
+          <input id="title" type="text" placeholder="Nhập tiêu đề (tùy chọn)" 
+            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition text-slate-700">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">Phụ đề</label>
+          <input id="subtitle" type="text" placeholder="Nhập phụ đề (tùy chọn)" 
+            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition text-slate-700">
+        </div>
+      </div>
+
+      <!-- Platforms -->
+      <div class="mb-6">
+        <label class="block text-xs font-semibold text-slate-500 mb-3 uppercase tracking-wide">Chọn nền tảng cần follow</label>
+        <div class="flex flex-wrap gap-2" id="platforms">
+          <button data-platform="youtube" class="platform-btn px-4 py-2 rounded-lg bg-red-500 text-white text-sm font-medium flex items-center gap-1.5">
+            <i class="fab fa-youtube"></i> YouTube
+          </button>
+          <button data-platform="telegram" class="platform-btn px-4 py-2 rounded-lg bg-sky-500 text-white text-sm font-medium flex items-center gap-1.5">
+            <i class="fab fa-telegram"></i> Telegram
+          </button>
+          <button data-platform="tiktok" class="platform-btn px-4 py-2 rounded-lg bg-black text-white text-sm font-medium flex items-center gap-1.5">
+            <i class="fab fa-tiktok"></i> TikTok
+          </button>
+          <button data-platform="instagram" class="platform-btn px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-medium flex items-center gap-1.5">
+            <i class="fab fa-instagram"></i> Instagram
+          </button>
+          <button data-platform="facebook" class="platform-btn px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium flex items-center gap-1.5">
+            <i class="fab fa-facebook"></i> Facebook
+          </button>
+          <button data-platform="x" class="platform-btn px-4 py-2 rounded-lg bg-slate-900 text-white text-sm font-medium flex items-center gap-1.5">
+            <i class="fab fa-x-twitter"></i> X
+          </button>
+          <button data-platform="zalo" class="platform-btn px-4 py-2 rounded-lg bg-blue-500 text-white text-sm font-medium flex items-center gap-1.5">
+            <i class="fas fa-comment"></i> Zalo
+          </button>
+          <button data-platform="discord" class="platform-btn px-4 py-2 rounded-lg bg-indigo-500 text-white text-sm font-medium flex items-center gap-1.5">
+            <i class="fab fa-discord"></i> Discord
+          </button>
+        </div>
+      </div>
+
+      <!-- Selected platforms config -->
+      <div id="selected-platforms" class="space-y-3 mb-6"></div>
+
+      <!-- Destination -->
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <div>
+          <label class="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">Tên nút đích</label>
+          <input id="destName" type="text" placeholder="Ví dụ: Tải file ngay" 
+            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition text-slate-700">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">Link đích (URL)</label>
+          <input id="destUrl" type="url" placeholder="https://..." 
+            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition text-slate-700">
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex gap-3 justify-center">
+        <button onclick="createLink()" class="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition shadow-lg shadow-indigo-200 flex items-center gap-2">
+          <i class="fas fa-link"></i> Tạo link
+        </button>
+        <button onclick="resetForm()" class="px-6 py-3 bg-slate-100 text-slate-600 font-medium rounded-xl hover:bg-slate-200 transition">
+          Đặt lại
+        </button>
+      </div>
+
+      <!-- Result -->
+      <div id="result" class="hidden mt-8 p-5 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl border border-indigo-100 fade-in">
+        <p class="text-sm font-semibold text-indigo-700 mb-2">🎉 Link của bạn đã sẵn sàng!</p>
+        <div class="flex items-center gap-2">
+          <input id="generatedLink" type="text" readonly 
+            class="flex-1 px-4 py-2.5 bg-white rounded-lg border border-indigo-200 text-sm text-slate-700 font-mono">
+          <button onclick="copyLink()" class="px-4 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition text-sm font-medium">
+            <i class="fas fa-copy"></i> Sao chép
+          </button>
+        </div>
+        <p class="text-xs text-slate-500 mt-2">Đây là bản demo. Trong thực tế link sẽ được lưu trên server và có kiểm tra sub thật.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="max-w-6xl mx-auto px-4 py-16">
+    <h2 class="text-3xl font-bold text-center text-slate-800 mb-4">Tại sao chọn Culink?</h2>
+    <p class="text-center text-slate-500 mb-12 max-w-xl mx-auto">Tất cả công cụ bạn cần để phát triển kênh mạng xã hội một cách thông minh.</p>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition">
+        <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-xl mb-4">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <h3 class="font-bold text-slate-800 mb-2">Tăng trưởng nhanh</h3>
+        <p class="text-sm text-slate-500">Tăng sub và engagement hiệu quả với hệ thống Sub to Unlock thông minh.</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition">
+        <div class="w-12 h-12 rounded-xl bg-green-100 text-green-600 flex items-center justify-center text-xl mb-4">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3 class="font-bold text-slate-800 mb-2">An toàn & Bảo mật</h3>
+        <p class="text-sm text-slate-500">Không yêu cầu mật khẩu. Bảo vệ tài khoản của bạn tuyệt đối.</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition">
+        <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl mb-4">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3 class="font-bold text-slate-800 mb-2">Cộng đồng lớn</h3>
+        <p class="text-sm text-slate-500">Hơn 50.000 creator đang sử dụng để phát triển kênh mỗi ngày.</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition">
+        <div class="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center text-xl mb-4">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <h3 class="font-bold text-slate-800 mb-2">Thống kê thông minh</h3>
+        <p class="text-sm text-slate-500">Theo dõi hiệu suất chi tiết để tối ưu chiến lược tăng trưởng.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="max-w-3xl mx-auto px-4 py-16">
+    <h2 class="text-3xl font-bold text-center text-slate-800 mb-10">Câu hỏi thường gặp</h2>
+    <div class="space-y-3">
+      <details class="bg-white rounded-xl border border-slate-100 p-5 group">
+        <summary class="font-semibold text-slate-800 cursor-pointer list-none flex justify-between items-center">
+          Sub to Unlock hoạt động như thế nào?
+          <i class="fas fa-chevron-down text-slate-400 group-open:rotate-180 transition"></i>
+        </summary>
+        <p class="mt-3 text-sm text-slate-500 leading-relaxed">
+          Bạn tạo một link chứa khóa nội dung (file, video, link...). Người xem phải follow/subscribe các kênh bạn chỉ định trước khi được mở khóa nội dung.
+        </p>
+      </details>
+      <details class="bg-white rounded-xl border border-slate-100 p-5 group">
+        <summary class="font-semibold text-slate-800 cursor-pointer list-none flex justify-between items-center">
+          Dịch vụ có miễn phí không?
+          <i class="fas fa-chevron-down text-slate-400 group-open:rotate-180 transition"></i>
+        </summary>
+        <p class="mt-3 text-sm text-slate-500 leading-relaxed">
+          Có, bạn có thể tạo và sử dụng không giới hạn số lượng link hoàn toàn miễn phí.
+        </p>
+      </details>
+      <details class="bg-white rounded-xl border border-slate-100 p-5 group">
+        <summary class="font-semibold text-slate-800 cursor-pointer list-none flex justify-between items-center">
+          Hỗ trợ những nền tảng nào?
+          <i class="fas fa-chevron-down text-slate-400 group-open:rotate-180 transition"></i>
+        </summary>
+        <p class="mt-3 text-sm text-slate-500 leading-relaxed">
+          YouTube, TikTok, Instagram, Facebook, Telegram, X (Twitter), Zalo, Discord và nhiều nền tảng khác.
+        </p>
+      </details>
+      <details class="bg-white rounded-xl border border-slate-100 p-5 group">
+        <summary class="font-semibold text-slate-800 cursor-pointer list-none flex justify-between items-center">
+          Tài khoản của tôi có an toàn không?
+          <i class="fas fa-chevron-down text-slate-400 group-open:rotate-180 transition"></i>
+        </summary>
+        <p class="mt-3 text-sm text-slate-500 leading-relaxed">
+          Hoàn toàn an toàn. Chúng tôi không bao giờ yêu cầu mật khẩu hay quyền truy cập vào tài khoản mạng xã hội của bạn.
+        </p>
+      </details>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 bg-white">
+    <div class="max-w-6xl mx-auto px-4 py-10 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">C</div>
+        <span class="font-bold text-slate-700">Culink</span>
+      </div>
+      <p class="text-sm text-slate-400">© 2026 Culink. Chỉ mang tính chất minh họa.</p>
+    </div>
+  </footer>
+
+  <!-- Unlock Modal (Demo) -->
+  <div id="unlockModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl fade-in">
+      <h3 id="modalTitle" class="text-xl font-bold text-slate-800 mb-1"></h3>
+      <p id="modalSubtitle" class="text-sm text-slate-500 mb-6"></p>
+      
+      <div id="modalPlatforms" class="space-y-3 mb-6"></div>
+      
+      <button id="unlockBtn" onclick="unlockContent()" disabled
+        class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-xl opacity-50 cursor-not-allowed transition">
+        Mở khóa nội dung
+      </button>
+      
+      <div id="unlockedContent" class="hidden mt-4 p-4 bg-green-50 rounded-xl border border-green-200 text-center">
+        <p class="text-green-700 font-medium mb-2">✅ Đã mở khóa!</p>
+        <a id="finalLink" href="#" target="_blank" class="text-indigo-600 font-semibold underline break-all"></a>
+      </div>
+      
+      <button onclick="closeModal()" class="mt-4 w-full text-sm text-slate-400 hover:text-slate-600">Đóng</button>
+    </div>
+  </div>
+
+  <script>
+    const selected = new Map();
+
+    // Platform toggle
+    document.querySelectorAll('.platform-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const platform = btn.dataset.platform;
+        if (selected.has(platform)) {
+          selected.delete(platform);
+          btn.classList.remove('ring-4', 'ring-offset-2', 'scale-105');
+        } else {
+          selected.set(platform, { url: '', name: platform });
+          btn.classList.add('ring-4', 'ring-offset-2', 'scale-105');
+          if (platform === 'youtube') btn.classList.add('ring-red-300');
+          else if (platform === 'telegram') btn.classList.add('ring-sky-300');
+          else if (platform === 'tiktok') btn.classList.add('ring-slate-400');
+          else if (platform === 'instagram') btn.classList.add('ring-pink-300');
+          else if (platform === 'facebook') btn.classList.add('ring-blue-300');
+          else btn.classList.add('ring-indigo-300');
+        }
+        renderSelected();
+      });
+    });
+
+    function renderSelected() {
+      const container = document.getElementById('selected-platforms');
+      container.innerHTML = '';
+      selected.forEach((data, platform) => {
+        const div = document.createElement('div');
+        div.className = 'p-4 bg-slate-50 rounded-xl border border-slate-200 fade-in';
+        div.innerHTML = `
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-sm font-semibold text-slate-700 capitalize">${platform}</span>
+          </div>
+          <input type="url" placeholder="Link kênh/profile ${platform}..." 
+            class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:border-indigo-500 outline-none"
+            value="${data.url}"
+            oninput="selected.get('${platform}').url = this.value">
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function createLink() {
+      if (selected.size === 0) {
+        alert('Vui lòng chọn ít nhất 1 nền tảng!');
+        return;
+      }
+      const destUrl = document.getElementById('destUrl').value.trim();
+      if (!destUrl) {
+        alert('Vui lòng nhập link đích!');
+        return;
+      }
+
+      const config = {
+        title: document.getElementById('title').value || 'Mở khóa nội dung',
+        subtitle: document.getElementById('subtitle').value || 'Follow các kênh bên dưới để tiếp tục',
+        destName: document.getElementById('destName').value || 'Truy cập ngay',
+        destUrl: destUrl,
+        platforms: Object.fromEntries(selected)
+      };
+
+      // Generate a fake short id
+      const id = Math.random().toString(36).substring(2, 8);
+      localStorage.setItem('link_' + id, JSON.stringify(config));
+
+      const link = window.location.origin + window.location.pathname + '?id=' + id;
+      document.getElementById('generatedLink').value = link;
+      document.getElementById('result').classList.remove('hidden');
+    }
+
+    function resetForm() {
+      document.getElementById('title').value = '';
+      document.getElementById('subtitle').value = '';
+      document.getElementById('destName').value = '';
+      document.getElementById('destUrl').value = '';
+      selected.clear();
+      document.querySelectorAll('.platform-btn').forEach(btn => {
+        btn.classList.remove('ring-4', 'ring-offset-2', 'scale-105', 'ring-red-300', 'ring-sky-300', 'ring-slate-400', 'ring-pink-300', 'ring-blue-300', 'ring-indigo-300');
+      });
+      renderSelected();
+      document.getElementById('result').classList.add('hidden');
+    }
+
+    function copyLink() {
+      const input = document.getElementById('generatedLink');
+      input.select();
+      navigator.clipboard.writeText(input.value);
+      alert('Đã sao chép link!');
+    }
+
+    // Check if opening a generated link
+    const params = new URLSearchParams(window.location.search);
+    const linkId = params.get('id');
+    if (linkId) {
+      const data = localStorage.getItem('link_' + linkId);
+      if (data) {
+        const config = JSON.parse(data);
+        showUnlockModal(config);
+      }
+    }
+
+    function showUnlockModal(config) {
+      document.getElementById('modalTitle').textContent = config.title;
+      document.getElementById('modalSubtitle').textContent = config.subtitle;
+      
+      const container = document.getElementById('modalPlatforms');
+      container.innerHTML = '';
+      
+      let checkedCount = 0;
+      const total = Object.keys(config.platforms).length;
+      
+      Object.entries(config.platforms).forEach(([platform, data]) => {
+        const div = document.createElement('div');
+        div.className = 'flex items-center justify-between p-3 bg-slate-50 rounded-xl';
+        div.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center text-indigo-600">
+              <i class="fab fa-${platform === 'x' ? 'x-twitter' : platform}"></i>
+            </div>
+            <div>
+              <p class="text-sm font-semibold capitalize text-slate-700">${platform}</p>
+              <a href="${data.url || '#'}" target="_blank" class="text-xs text-indigo-500 hover:underline">Mở kênh →</a>
+            </div>
+          </div>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" class="w-5 h-5 rounded accent-indigo-600 platform-check">
+            <span class="text-xs text-slate-500">Đã follow</span>
+          </label>
+        `;
+        container.appendChild(div);
+      });
+
+      // Listen to checkboxes
+      document.querySelectorAll('.platform-check').forEach(cb => {
+        cb.addEventListener('change', () => {
+          checkedCount = document.querySelectorAll('.platform-check:checked').length;
+          const btn = document.getElementById('unlockBtn');
+          if (checkedCount === total) {
+            btn.disabled = false;
+            btn.classList.remove('opacity-50', 'cursor-not-allowed');
+            btn.classList.add('hover:bg-indigo-700');
+          } else {
+            btn.disabled = true;
+            btn.classList.add('opacity-50', 'cursor-not-allowed');
+            btn.classList.remove('hover:bg-indigo-700');
+          }
+        });
+      });
+
+      window.currentConfig = config;
+      document.getElementById('unlockModal').classList.remove('hidden');
+      document.getElementById('unlockModal').classList.add('flex');
+    }
+
+    function unlockContent() {
+      const config = window.currentConfig;
+      document.getElementById('unlockedContent').classList.remove('hidden');
+      const link = document.getElementById('finalLink');
+      link.href = config.destUrl;
+      link.textContent = config.destName + ' → ' + config.destUrl;
+    }
+
+    function closeModal() {
+      document.getElementById('unlockModal').classList.add('hidden');
+      document.getElementById('unlockModal').classList.remove('flex');
+      // Remove query param
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  </script>
+</body>
+</html>
