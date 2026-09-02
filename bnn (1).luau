@@ -2018,7 +2018,7 @@ function Kz.CreateMain(Y)
 	r.Position = UDim2.new(.5, 0, .5, 0);
 	r.Selectable = true;
 	r.Size = UDim2.new(1, 30, 1, 30);
-	r.Image = "rbxassetid://129781592728096";
+	r.Image = "https://i.ibb.co/vCG2G7v1/5002.png";
 	r.ScaleType = Enum.ScaleType.Slice;
 	r.SliceCenter = Rect.new(15, 15, 175, 175);
 	r.SliceScale = 1.3;
