@@ -1,3 +1,5 @@
+repeat task.wait() until game:IsLoaded()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/nvb201112/fix-lag/refs/heads/main/fix%20lag%20new.luau"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/refs/heads/main/attack-module.lua"))()
 local Y = game.Players;
 local d = Y.LocalPlayer;
